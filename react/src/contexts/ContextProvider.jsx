@@ -13,7 +13,7 @@ export const ContextProvider = ({children}) => {
     email: "glauber.iury@gmail.com"
   });
 
-  const [userToken, setUserToken] = useState('123')
+  const [userToken, setUserToken] = useState(null)
   return (
     <StateContext.Provider value={{
       currentUser,

@@ -7,6 +7,8 @@ import Settings from "./views/Settings.jsx";
 import GuestLayout from "./components/GuestLayout.jsx";
 import DefaultLayout from "./components/DefaultLayout.jsx";
 import Clients from "./views/Clients.jsx";
+import FormPayment from "./views/FormPayment.jsx";
+import PricingPage from "./views/PricingPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -47,7 +49,16 @@ const router = createBrowserRouter([
         path: '/signup',
         element: <Signup />
       },
+
     ]
+  },
+  {
+    path: '/pricing',
+    element: <PricingPage />
+  },
+  {
+    path: '/payment',
+    element: <FormPayment />
   }
 
 ])
