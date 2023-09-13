@@ -1,7 +1,12 @@
 import React from 'react';
-import {Outlet} from "react-router-dom";
+import {Navigate, Outlet} from "react-router-dom";
+import {userStateContext} from "../contexts/ContextProvider.jsx";
 
 function GuestLayout(props) {
+  const { currentUser, userToken} = userStateContext();
+  if(userToken) {
+    return <Navigate to='/' />
+  }
   return (
     <div>
       <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">

@@ -6,6 +6,7 @@ use App\Enums\OrderStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Order extends Model
@@ -26,5 +27,17 @@ class Order extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function skus(): BelongsToMany
+    {
+        return $this->belongsToMany(Sku::class)
+        ->using(OrderSku::class)
+        ->withPivot('quantity', 'unitary_price', 'product');
+    }
+
+    public function payment(): hasMany
+    {
+        return $this->hasMany(Payment::class);
     }
 }
