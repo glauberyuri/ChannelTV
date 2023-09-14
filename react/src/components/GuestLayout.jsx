@@ -16,11 +16,9 @@ function GuestLayout(props) {
             src="/images/MenuLogo.png"
             alt="Your Company"
           />
-
         </div>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-
-        <Outlet />
+          <Outlet />
         </div>
       </div>
     </div>
