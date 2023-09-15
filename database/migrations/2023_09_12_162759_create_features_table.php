@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('views');
             $table->string('type');
             $table->timestamps();
+            $table->softDeletes();
+
         });
     }
 

@@ -3,6 +3,7 @@ import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import {Navigate, NavLink, Outlet} from "react-router-dom";
 import {useStateContext} from "../contexts/ContextProvider.jsx";
+import axiosClient from "../../axios.js";
 
 
 const navigation = [
@@ -17,12 +18,23 @@ function classNames(...classes) {
 
 export default function DefaultLayout() {
   {/*  Data User Current   */}
-  const { currentUser, userToken} = useStateContext();
+  const { currentUser, currentCart, userToken, setUserToken, setCurrentCart, setCurrentUser} = useStateContext();
   {/*  Function logout     */}
   const logout = (ev) => {
     ev.preventDefault();
-    console.log('logout');
+    axiosClient.post('/logout')
+      .then(res => {
+        setCurrentUser({})
+        setUserToken(null)
+      })
+  }
 
+  const loadCart = () => {
+    axiosClient.get('/loadCart')
+      .then(({data}) => {
+        console.log(data)
+        setCurrentCart(data)
+      })
   }
   if(!userToken) {
     return <Navigate to='login' />
@@ -90,7 +102,7 @@ export default function DefaultLayout() {
                               <Menu.Item>
                                   <a
                                     href="#"
-                                    onClick={(ev) => logout(ev)}
+                                    onClick={(ev) => loadCart()}
                                     className="block px-4 py-2 text-sm text-gray-700"
                                   >
                                   Sair

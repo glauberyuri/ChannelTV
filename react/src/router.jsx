@@ -35,6 +35,10 @@ const router = createBrowserRouter([
         path: '/settings',
         element: <Settings />
       },
+      {
+        path: '/payment',
+        element: <FormPayment />
+      }
     ],
   },
   {
@@ -55,11 +59,8 @@ const router = createBrowserRouter([
   {
     path: '/pricing',
     element: <PricingPage />
-  },
-  {
-    path: '/payment',
-    element: <FormPayment />
   }
+
 
 ])
 
