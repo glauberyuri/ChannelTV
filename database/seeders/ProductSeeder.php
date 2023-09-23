@@ -17,10 +17,8 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         Product::factory()
-            ->has(Sku::factory()
-                ->hasAttached(Feature::factory()->count(1), ['value' => '1'])
+                ->hasAttached(Feature::factory()->count(1), ['name' => '1000 Canais'])
                 ->count(3)
-            )
             ->count(5)
             ->create([
                 'category_id' => Category::first()->id,

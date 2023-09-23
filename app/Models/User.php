@@ -44,12 +44,16 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function Addresses(): HasMany
+    public function Address(): HasMany
     {
         return $this->HasMany(Address::class);
     }
-    public function oders() : HasMany
+    public function Order() : HasMany
     {
         return $this->hasMany(Order::class);
+    }
+    public function Client() : HasMany
+    {
+        return $this->hasMany(Client::class);
     }
 }

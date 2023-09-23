@@ -17,9 +17,8 @@ class FeatureFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->randomElement(['Cor', 'Tamanho']),
-            'views' => $this->faker->randomElement([1,2,3]),
-            'type' => $this->faker->word(),
+            'description' => $this->faker->randomElement(['1 Tela', '+100,000 Conteúdos', 'Qualidade FHD/HD/SD', 'Assista no Smartphone/Tablet']),
+
         ];
     }
 }

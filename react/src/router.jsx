@@ -9,6 +9,8 @@ import DefaultLayout from "./components/DefaultLayout.jsx";
 import Clients from "./views/Clients.jsx";
 import FormPayment from "./views/FormPayment.jsx";
 import PricingPage from "./views/PricingPage.jsx";
+import ProductCreateView from "./views/ProductCreateView.jsx";
+import ProductsView from "./views/ProductsView.jsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,14 @@ const router = createBrowserRouter([
       {
         path: '/payment',
         element: <FormPayment />
+      },
+      {
+        path: '/plans',
+        element: <ProductsView />
+      },
+      {
+        path: '/createProduct',
+        element: <ProductCreateView />
       }
     ],
   },

@@ -1,28 +1,44 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import CreditCardComponent from "../components/CreditCardComponent.jsx";
+import axiosClient from "../../axios.js";
 
 function FormPayment(props) {
+    const [currentCart, setCurrentCart] = useState([]);
+
+    useEffect(() => {
+        axiosClient.get('/loadCart')
+            .then(({data}) =>{
+                console.log(data)
+                setCurrentCart(data)
+            })
+    }, []);
   return (
     <div>
-
       <div className="w-full bg-white border-t border-b border-gray-200 px-5 py-10 mt-10 text-gray-800">
         <div className="w-full -mx-3 md:flex items-start">
           <section className="px-3 md:w-7/12 lg:pr-10">
-            <div className="w-full mx-auto text-gray-800 font-light mb-6 border-b border-gray-200 pb-6">
-              <div className="w-full flex items-center">
-                <div className="overflow-hidden rounded-lg w-16 h-16 bg-gray-50 border border-gray-200">
-                  <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80" alt="" />
-                </div>
-                <div className="flex-grow pl-3">
-                  <h6 className="font-semibold uppercase text-gray-600">Ray Ban Sunglasses</h6>
-                  <p className="text-gray-400">x 1</p>
-                </div>
-                <div>
-                  <span className="font-semibold text-gray-600 text-xl">$210</span>
-                  <span className="font-semibold text-gray-600 text-sm">.00</span>
-                </div>
+              <div className="w-full mx-auto text-gray-800 font-light mb-6 border-b border-gray-200 pb-6">
+                  {currentCart.skus.map((sku) => (
+                      <div key={sku[id]} className="w-full flex items-center mb-6">
+                          <div className="overflow-hidden rounded-lg w-16 h-16 bg-gray-50 border border-gray-200">
+                              <img src="/images/MenuLogo.png" alt="Product" />
+                          </div>
+                          <div className="flex-grow pl-3">
+                              <h6 className="font-semibold uppercase text-gray-600">{sku.name}</h6>
+                              <p className="text-gray-400">SKU: {sku.id}</p>
+                              <ul>
+                                  {sku.features.map((feature) => (
+                                      <li key={feature.id}>{feature.name}: {feature.value}</li>
+                                  ))}
+                              </ul>
+                          </div>
+                          <div>
+                              <span className="font-semibold text-gray-600 text-xl">${sku.price}</span>
+                              <span className="font-semibold text-gray-600 text-sm">.00</span>
+                          </div>
+                      </div>
+                  ))}
               </div>
-            </div>
             <div className="mb-6 pb-6 border-b border-gray-200">
               <div className="-mx-2 flex items-end justify-end">
                 <div className="flex-grow px-2 lg:max-w-xs">

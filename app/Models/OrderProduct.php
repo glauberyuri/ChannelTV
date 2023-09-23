@@ -7,13 +7,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class OrderSku extends Pivot
+class OrderProduct extends Pivot
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'order_id',
-        'sku_id',
+        'product_id',
         'product',
         'quantity',
         'unitary_price'
@@ -28,8 +28,8 @@ class OrderSku extends Pivot
         return $this->belongsTo(Order::class);
     }
 
-    public function sku(): BelongsTo
+    public function Product(): BelongsTo
     {
-        return $this->belongsTo(Sku::class);
+        return $this->belongsTo(Product::class);
     }
 }

@@ -15,7 +15,7 @@ class UserSeeder extends Seeder
     {
         User::factory()
             ->count(10)
-            ->hasAddresses(1)
+            ->hasAddress(1)
             ->create();
     }
 }

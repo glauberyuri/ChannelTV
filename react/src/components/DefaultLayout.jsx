@@ -4,12 +4,13 @@ import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import {Navigate, NavLink, Outlet} from "react-router-dom";
 import {useStateContext} from "../contexts/ContextProvider.jsx";
 import axiosClient from "../../axios.js";
-
+import { TfiUser } from "react-icons/tfi"
 
 const navigation = [
   { name: 'Dashboard', to: '/'},
   { name: 'Clientes', to: '/clients'},
   { name: 'Usuarios', to: '/users'},
+  { name: 'Planos', to: '/plans'},
   { name: 'Configurações', to: '/settings'},
 ];
 function classNames(...classes) {
@@ -18,8 +19,9 @@ function classNames(...classes) {
 
 export default function DefaultLayout() {
   {/*  Data User Current   */}
-  const { currentUser, currentCart, userToken, setUserToken, setCurrentCart, setCurrentUser} = useStateContext();
+  const { currentUser, userToken, setUserToken, setCurrentUser} = useStateContext();
   {/*  Function logout     */}
+
   const logout = (ev) => {
     ev.preventDefault();
     axiosClient.post('/logout')
@@ -29,13 +31,7 @@ export default function DefaultLayout() {
       })
   }
 
-  const loadCart = () => {
-    axiosClient.get('/loadCart')
-      .then(({data}) => {
-        console.log(data)
-        setCurrentCart(data)
-      })
-  }
+
   if(!userToken) {
     return <Navigate to='login' />
   }
@@ -102,7 +98,7 @@ export default function DefaultLayout() {
                               <Menu.Item>
                                   <a
                                     href="#"
-                                    onClick={(ev) => loadCart()}
+                                    onClick={(ev) => logout(ev)}
                                     className="block px-4 py-2 text-sm text-gray-700"
                                   >
                                   Sair
@@ -150,7 +146,7 @@ export default function DefaultLayout() {
                     </div>
                     <div className="ml-3">
                       <div className="text-base font-medium leading-none text-white">{currentUser.name}</div>
-                      <div className="text-sm font-medium leading-none text-gray-400">{currentUser.email}</div>
+                      <div className="text-sm font-medium leading-none text-gray-400">{currentUser.username}</div>
                     </div>
                   </div>
                   <div className="mt-3 space-y-1 px-2">

@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('feature_sku', function (Blueprint $table) {
+        Schema::create('feature_product', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sku_id')->constrained();
+            $table->foreignId('product_id')->constrained();
             $table->foreignId('feature_id')->constrained();
-            $table->string('value');
-            $table->softDeletes();
+            $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('feature_sku');
+        Schema::dropIfExists('features_products');
     }
 };

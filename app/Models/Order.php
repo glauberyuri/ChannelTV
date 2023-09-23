@@ -29,10 +29,10 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function skus(): BelongsToMany
+    public function Products(): BelongsToMany
     {
-        return $this->belongsToMany(Sku::class)
-        ->using(OrderSku::class)
+        return $this->belongsToMany(Product::class)
+        ->using(OrderProduct::class)
         ->withPivot('quantity', 'unitary_price', 'product');
     }
 

@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,9 +20,12 @@ class ProductFactory extends Factory
     {
         return [
             'category_id' => Category::inRandomOrder()->first()->id,
+            'user_id' => User::inRandomOrder()->first()->id,
             'name' => $this->faker->word(),
             'description' => $this->faker->paragraph(1),
-            'slug' => $this->faker->slug()
+            'price' => $this->faker->randomDigitNot(0),
+            'views' =>  random_int(1, 3),
+
         ];
     }
 }

@@ -3,16 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class FeatureSku extends Pivot
+class FeatureProduct extends Pivot
 {
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
-        'sku_id',
+        'product_id',
         'feature_id',
-        'value',
+        'name'
     ];
+
+    public function Product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
 }

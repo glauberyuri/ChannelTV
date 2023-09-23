@@ -1,6 +1,7 @@
 import React from 'react';
 
 function PageComponent({title, buttons = '', children}) {
+
   return (
     <div>
       <header className="bg-white shadow">

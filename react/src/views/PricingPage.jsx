@@ -4,6 +4,7 @@ import FormPaymentComponent from "../components/PaymentForm/FormPaymentComponent
 function PricingPage(props) {
   return (
     <FormPaymentComponent />
+
   );
 }
 

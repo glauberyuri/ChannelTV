@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('skus', function (Blueprint $table) {
+        Schema::create('order_product', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('order_id')->constrained();
             $table->foreignId('product_id')->constrained();
-            $table->string('name');
-            $table->decimal('price', 8, 2);
-            $table->timestamps();
+            $table->json('product');
+            $table->integer('quantity');
+            $table->decimal('unitary_price', 10, 2);
             $table->softDeletes();
+            $table->timestamps();
         });
     }
 
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('skus');
+        Schema::dropIfExists('order_sku');
     }
 };

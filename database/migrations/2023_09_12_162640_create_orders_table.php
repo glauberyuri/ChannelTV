@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('session_id')->nullable();
             $table->decimal('total', 10, 2)->nullable();
             $table->integer('status');
-
             $table->softDeletes();
             $table->timestamps();
         });

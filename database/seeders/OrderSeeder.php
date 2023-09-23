@@ -4,6 +4,8 @@ namespace Database\Seeders;
 
 use App\Enums\OrderStatusEnum;
 use App\Models\Order;
+use App\Models\OrderProduct;
+use App\Models\Product;
 use App\Models\Sku;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
@@ -23,17 +25,17 @@ class OrderSeeder extends Seeder
             ]);
 
         $cart->each(function ($cart) {
-            $sku = Sku::with('product')->inRandomOrder()->take(random_int(1, 15))->get();
+            $sku = Product::with('Products')->inRandomOrder()->take(random_int(1, 15))->get();
 
             $total = 0;
             $cart->total = 0;
 
             $sku->each(function ($item) use ($cart, $total) {
                 $qtd = random_int(1, 3);
-                $cart->skus()->attach([$item->id => [
+                $cart->Products()->attach([$item->id => [
                     'quantity' => $qtd,
                     'unitary_price' => $item->price,
-                    'product' => $item->product->toJson()
+                    'product' => $item->product ? $item->product->toJson() : 'null',
                 ]]);
 
                 $total = $qtd * $item->price;
